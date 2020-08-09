@@ -67,10 +67,6 @@ def parse_iterable(lines, select=None, types=None, has_headers=True, delimiter='
     if (select) and (has_headers == False):
         raise RuntimeError('select argument requires column headers')
 
-    # if has_headers:
-    #     headers = next(rows)
-    # else:
-    #     headers = []
     headers = next(rows) if has_headers else []
 
     # Get the indices of selected columns specified in the "select" list

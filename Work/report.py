@@ -5,6 +5,7 @@
 from fileparse import parse_iterable
 import stock
 import tableformat
+from portfolio import Portfolio
 
 def read_portfolio(filename):
     '''
@@ -13,7 +14,9 @@ def read_portfolio(filename):
     with open(filename) as lines:
         portdicts = parse_iterable(lines, select=['name', 'shares', 'price'], types=[str, int, float])
     
-    return [stock.Stock(d['name'], d['shares'], d['price']) for d in portdicts]
+    portfolio = [stock.Stock(d['name'], d['shares'], d['price']) for d in portdicts]
+    
+    return Portfolio(portfolio)
 
 def read_prices(filename):
     '''
@@ -55,10 +58,8 @@ def print_report(report, formatter):
     Print a nicely formatted table from a list of (name, shares, price, change) tuples.
     '''
     formatter.headings(['Name', 'Shares', 'Price', 'Change'])
-    # print(('-'*10 + ' ')*len(headers))
     for name, shares, price, change in report:
         formatted_price = '$' + str(f'{price:0.2f}')
-        # print(f'{name:>10s} {shares:>10d} {formatted_price:>10s} {change:>10.2f}')
         rowdata = [name, str(shares), formatted_price, f'{change:0.2f}']
         formatter.row(rowdata)
 

@@ -11,7 +11,7 @@ def portfolio_cost(filename):
     '''
     portfolio = report.read_portfolio(filename)
 
-    return sum([stock.shares * stock.price for stock in portfolio])
+    return portfolio.total_cost
 
 def main(args):
     if len(args) != 2:

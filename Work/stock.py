@@ -2,7 +2,7 @@ class Stock:
     '''
     A single holding of stock with name, shares, and price attributes
     '''
-    __slots__ = ('name', 'shares', 'price')
+    __slots__ = ('name', '_shares', 'price')
 
     def __init__(self, name, shares, price):
         self.name = name
