@@ -92,10 +92,6 @@ def parse_iterable(lines, select=None, types=None, has_headers=True, delimiter='
                 row = [func(val) for func, val in zip(types, row)]
 
             # Make a dictionary or a tuple
-            # if has_headers:
-            #     record = dict(zip(headers, row))
-            # else:
-            #     record = tuple(row)
             record = dict(zip(headers, row)) if has_headers else tuple(row)
             records.append(record)
         except ValueError as e:
