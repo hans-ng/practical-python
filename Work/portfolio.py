@@ -1,7 +1,29 @@
+import fileparse
+import stock
+
 class Portfolio:
 
-    def __init__(self, holdings):
-        self._holdings = holdings
+    def __init__(self):
+        self._holdings = []
+
+    def append(self, holding):
+        if not isinstance(holding, stock.Stock):
+            raise TypeError('Expect a Stock instance')
+        self._holdings.append(holding)
+
+    @classmethod
+    def from_csv(cls, lines, **opts):
+        self = cls()
+        portdicts = fileparse.parse_iterable(lines,
+                                             select=['name', 'shares', 'price'],
+                                             types=[str, int, float],
+                                             **opts,
+                                             )
+    
+        for d in portdicts:
+            self.append(stock.Stock(**d))
+
+        return self
 
     def __iter__(self):
         return self._holdings.__iter__()

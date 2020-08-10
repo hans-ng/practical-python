@@ -3,6 +3,9 @@
 # Exercise 3.3
 
 import csv
+import logging
+
+log = logging.getLogger(__name__)
 
 def parse_csv(filename, select=None, types=None, has_headers=True, delimiter=',', silence_errors=False):
     '''
@@ -97,7 +100,9 @@ def parse_iterable(lines, select=None, types=None, has_headers=True, delimiter='
         except ValueError as e:
             if silence_errors:
                 continue
-            print("Row {0}: Couldn't convert {1}".format(rowno+1, row))
-            print("Row {}: Reason {}".format(rowno+1, e))
+            # print("Row {0}: Couldn't convert {1}".format(rowno+1, row))
+            # print("Row {}: Reason {}".format(rowno+1, e))
+            log.warning("Row %d: Couldn't convert %s", rowno+1, row)
+            log.debug("Row %d: Reason %s", rowno+1, e)
         
     return records
