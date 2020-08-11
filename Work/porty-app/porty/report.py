@@ -2,10 +2,10 @@
 #
 # Exercise 2.4
 # import csv
-from fileparse import parse_iterable
-import stock
-import tableformat
-from portfolio import Portfolio
+from .fileparse import parse_iterable
+from . import stock
+from . import tableformat
+from .portfolio import Portfolio
 
 def read_portfolio(filename, **opts):
     '''

@@ -1,4 +1,4 @@
-import typedproperty
+from . import typedproperty
 
 class Stock:
     '''
